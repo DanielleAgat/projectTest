@@ -445,3 +445,4 @@ _deps
   
 # Default ignored files
 /workspace.xml
+/CMakeLists.txt
