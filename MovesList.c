@@ -32,8 +32,8 @@ void copyBoard(char** orig, char dest[][M]){
 bool moveCellIfValid(char board[][M],boardPos currCell, Move move){
     bool isValid = false;
 
-    int verticalStep = changeInCapitals(move.rows); //TODO: Check the (-) issue
-    int horizontalStep = parseInt(move.cols); //TODO: Check the (-) issue
+    char verticalStep = changeInCapitals(move.rows); //TODO: Check the (-) issue
+    char horizontalStep = move.cols; //TODO: Check the (-) issue
     if(board[currCell[0] + verticalStep][currCell[1] + horizontalStep] == ' '){
         isValid = true;
         //Update the location of the current cell according to the move:

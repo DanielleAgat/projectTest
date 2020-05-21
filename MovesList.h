@@ -8,7 +8,6 @@
 #include "Types.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "ErrorsHandlings.h"
 #include "stdbool.h"
 
 //TODO: Add description
