@@ -29,14 +29,11 @@ void PrintBoard(char** board){
 	}
 }
 
-void initMovesArray(movesArray** moves)
-{
+void initMovesArray(movesArray** moves){
 	int i, j;
 
-	for (i = 0; i < N; i++)
-	{
-		for (j = 0; j < M; j++)
-		{
+	for (i = 0; i < N; i++){
+		for (j = 0; j < M; j++){
 			moves[i][j].size = 4;
 			moves[i][j].moves = (Move*)malloc(sizeof(Move) * 4);
 			moves[i][j].moves[0].rows = 2;
@@ -51,27 +48,22 @@ void initMovesArray(movesArray** moves)
 	}
 }
 
-boardPosArray** validMoves(movesArray** moves, char** board)
-{
+boardPosArray** validMoves(movesArray** moves, char** board){
 	boardPosArray** res;
 	int i, j;
 
 	res = (boardPosArray**)malloc(sizeof(boardPosArray*) * N);
-	for (i = 0; i < N; i++)
-	{
+	for (i = 0; i < N; i++){
 		res[i] = (boardPosArray*)malloc(sizeof(boardPosArray) * M);
-		for (j = 0; j < M; j++)
-		{
+		for (j = 0; j < M; j++){
 			int logsize = 0;
 			Move* temp = (Move*)malloc(sizeof(Move) * moves[i][j].size); //4
 			res[i][j].positions = (boardPos*)malloc(sizeof(boardPos) * moves[i][j].size);
 
 			int indexMoves = 0;
 			int indexPos = 0;
-			while (indexMoves < moves[i][j].size)
-			{
-				if (isValid(board, moves[i][j].moves[indexMoves], i, j))
-				{
+			while (indexMoves < moves[i][j].size){
+				if (isValid(board, moves[i][j].moves[indexMoves], i, j)){
 					temp[logsize].rows = moves[i][j].moves[indexMoves].rows;
 					temp[logsize].cols = moves[i][j].moves[indexMoves].cols;
 					logsize++;
@@ -81,8 +73,7 @@ boardPosArray** validMoves(movesArray** moves, char** board)
 				}
 				indexMoves++;
 			}
-			if (logsize < indexMoves)
-			{
+			if (logsize < indexMoves){
 				temp = (Move*)realloc(temp, (sizeof(Move)) * logsize);
 				res[i][j].positions = (boardPos*)realloc(res[i][j].positions, (sizeof(boardPos)) * logsize);
 				res[i][j].size = logsize;
@@ -95,6 +86,8 @@ boardPosArray** validMoves(movesArray** moves, char** board)
 	}
 	return res;
 }
+
+
 BOOL isValid(char** board, Move cellDest, int i, int j){
 	char rowDest = cellDest.rows;
 	char colDest = cellDest.cols;

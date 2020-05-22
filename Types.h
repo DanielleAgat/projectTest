@@ -18,6 +18,9 @@ typedef int BOOL;
 #define TRUE 1
 #define FALSE 0
 
+#define TAKEN '#'
+#define BLOCKED '*'
+
 
 // Board types:
 #define N 4 //Board's rows

@@ -14,10 +14,10 @@
 int display( movesList* moves_list, boardPos start, char** board);
 
 //TODO: Add description
-void copyBoard(char** orig, char dest[][M]);
+void copyBoard(char** orig, char** dest);
 
 //TODO: Add description
-bool moveCellIfValid(char board[][M],boardPos currCell, Move move);
+void addCellToPath(char** board,boardPos currCell,Move move);
 
 //TODO: Add description
 void removeMoveFromList(movesList* moves_List,moveCell* toRemove);
@@ -32,5 +32,8 @@ void _freeMovesList(moveCell* move);
 
 //TODO: Add description
 void freeMoveCell(moveCell* moveNode);
+
+//TODO: Add description
+void freeBoard(char** board);
 
 #endif
