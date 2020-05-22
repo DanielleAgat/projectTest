@@ -2,26 +2,7 @@
 #define MovesArray
 #include <stdio.h>
 #include <stdlib.h>
-#define N 4
-#define M 5
-
-
-typedef char boardPos[2];
-
-typedef struct _move { // תזוזה על הלוח 
-	char rows, cols;
-} Move;
-
-typedef struct _movesArray {  // מערך של תזוזות בלוח 
-	unsigned int size;
-	Move* moves;
-} movesArray;
-
-typedef struct _boardPosArray { //מערך של מיקומי משבצות בלוח    
-	unsigned int size;
-	boardPos* positions;
-} boardPosArray;
-
+#include "Types.h"
 
 void PrintMovesBoard(movesArray** moves);
 void PrintBoard(char** board);

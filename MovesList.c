@@ -4,6 +4,7 @@
 //Student's ID 2:
 
 #include "MovesList.h"
+#include "MovesArray.h"
 
 int display(movesList* moves_list, boardPos start, char** board){
     char boardCopy[N][M];
@@ -19,7 +20,7 @@ int display(movesList* moves_list, boardPos start, char** board){
         currMoveCell = currMoveCell->next;
     }
 
-//    TODO: Print the copy board
+    PrintBoard(boardCopy);
     return counter;
 }
 

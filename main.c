@@ -3,6 +3,8 @@
 //Student's name 2: Tal Luvton
 //Student's ID 2:
 #include "MovesArray.h"
+#include "MovesList.h"
+
 void main()
 {
 	char* board[] = { "  *  ",

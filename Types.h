@@ -6,9 +6,7 @@
 #ifndef PROJECT_TYPES_H
 #define PROJECT_TYPES_H
 
-// Board types:
-#define N 4 //Board's rows
-#define M 5 //Board's cols
+//General types:
 
 //TODO: Add description to MACRO
 #define parseInt(char) (char - '0')
@@ -16,6 +14,14 @@
 //TODO: Add description to MACRO
 #define changeInCapitals(char) (char - 'A')
 
+typedef int BOOL;
+#define TRUE 1
+#define FALSE 0
+
+
+// Board types:
+#define N 4 //Board's rows
+#define M 5 //Board's cols
 
 typedef char boardPos[2];
 

@@ -1,37 +1,28 @@
 #include "MovesArray.h"
 
-void PrintMovesBoard(movesArray** moves)
-{
+void PrintMovesBoard(movesArray** moves){
 	char row_letter = 65;
 	printf(" ");
 	int i, j;
-	for (j = 1; j < (M + 1); j++)
-	{
+	for (j = 1; j < (M + 1); j++){
 		printf("    %d", j);
 	}
 	printf("\n");
-	for (i = 0; i < N; i++)
-	{
-
+	for (i = 0; i < N; i++){
 		printf("%c", row_letter);
-		for (int j = 0; j < M; j++)
-		{
+		for (int j = 0; j < M; j++){
 			//printf("    %c", moves[i][j]);
 		}
 		row_letter++;
 		printf("\n");
-
 	}
 }
 
-void PrintBoard(char** board)
-{
+void PrintBoard(char** board){
 	int i, j;
 
-	for (i = 0; i < N; i++)
-	{
-		for (j = 0; j < M; j++)
-		{
+	for (i = 0; i < N; i++){
+		for (j = 0; j < M; j++){
 			printf("%c   ", board[i][j]);
 		}
 		printf("\n");
@@ -104,16 +95,14 @@ boardPosArray** validMoves(movesArray** moves, char** board)
 	}
 	return res;
 }
-int isValid(char** board, Move cellDest, int i, int j)
-{
+BOOL isValid(char** board, Move cellDest, int i, int j){
 	char rowDest = cellDest.rows;
 	char colDest = cellDest.cols;
 
 	if (i + rowDest >= N || i + rowDest < 0 || j + colDest >= M || j + colDest < 0)
-		return 0;
+		return FALSE;
 	else if (board[i + rowDest][j + colDest] != ' ')
-		return 0;
+		return FALSE;
 	else
-		return 1;
-
+		return TRUE;
 }
