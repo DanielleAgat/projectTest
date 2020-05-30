@@ -1,7 +1,7 @@
 //Student's name 1: Danielle Agat Levi
 //Student's ID 1: 313357329
 //Student's name 2: Tal Luvton
-//Student's ID 2:
+//Student's ID 2: 318420601
 
 #ifndef PROJECT_MOVESLIST_H
 #define PROJECT_MOVESLIST_H
@@ -9,18 +9,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stdbool.h"
+#include "ErrorsHandlings.h"
 
 //TODO: Add description
 int display( movesList* moves_list, boardPos start, char** board);
 
 //TODO: Add description
-void copyBoard(char** orig, char** dest);
+void copyBoard(char** orig, char** dest,boardPos start);
 
 //TODO: Add description
-void addCellToPath(char** board,boardPos currCell,Move move);
+void addCellToPath(char** board,boardPos currCell,Move move,char index);
 
 //TODO: Add description
-void removeMoveFromList(movesList* moves_List,moveCell* toRemove);
+void removeMoveFromList(movesList* moves_List,moveCell**toRemove);
 
 //Free memory allocation functions:
 
@@ -29,9 +30,6 @@ void freeMovesList(movesList* moves_list);
 
 //TODO: Add description
 void _freeMovesList(moveCell* move);
-
-//TODO: Add description
-void freeMoveCell(moveCell* moveNode);
 
 //TODO: Add description
 void freeBoard(char** board);

@@ -20,10 +20,24 @@ void PrintMovesBoard(movesArray** moves){
 
 void PrintBoard(char** board){
 	int i, j;
+	char rowLetter = 'A';
 
+
+//	Print cols row:
+    printf(" ");
+    for (j = 1; j < (M + 1); j++){
+        printf("%*d",4,j);
+    }
+    printf("\n");
+
+//    Print board:
 	for (i = 0; i < N; i++){
+        printf("%c", rowLetter++); //print rows col
 		for (j = 0; j < M; j++){
-			printf("%c   ", board[i][j]);
+		    if(board[i][j] == TAKEN || board[i][j] == BLOCKED || board[i][j] == ' ')
+                printf("%*c",4, board[i][j]);
+		    else
+                printf("%*d",4, board[i][j]);
 		}
 		printf("\n");
 	}

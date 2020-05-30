@@ -1,16 +1,28 @@
 //Student's name 1: Danielle Agat Levi
 //Student's ID 1: 313357329
 //Student's name 2: Tal Luvton
-//Student's ID 2:
+//Student's ID 2: 318420601
+
 #include "MovesArray.h"
 #include "MovesList.h"
+#include "List_Tests.h"
 
-void main()
-{
+void main(){
+//#define question1
+#define question2
+
 	char* board[] = { "  *  ",
 					  "*    ",
 					  "    *",
 					  "  * *" };
+
+    char* emptyBoard[] = { "     ",
+                           "     ",
+                           "     ",
+                           "     " };
+
+///////////////    Question 1 tests:    ///////////////
+#ifdef question1
 	movesArray** moves;
 	boardPosArray** positionsArray;
 	int i, j;
@@ -36,4 +48,20 @@ void main()
 			}
 		}
 	}
+#endif
+
+///////////////    Question 2 tests:    ///////////////
+#ifdef question2
+    boardPos start = {'A',2};
+    movesList list = getListFromUser();
+	printList(list);
+
+	int removedCells = display(&list,start,board);
+	printf("Number of invalid moves that were removed: %d",removedCells);
+
+#endif
+
 }
+
+
+

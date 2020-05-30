@@ -1,7 +1,7 @@
 //Student's name 1: Danielle Agat Levi
 //Student's ID 1: 313357329
 //Student's name 2: Tal Luvton
-//Student's ID 2:
+//Student's ID 2: 318420601
 
 #ifndef PROJECT_TYPES_H
 #define PROJECT_TYPES_H
@@ -20,6 +20,7 @@ typedef int BOOL;
 
 #define TAKEN '#'
 #define BLOCKED '*'
+#define EOS '\0' //End Of String
 
 
 // Board types:
@@ -56,5 +57,22 @@ typedef struct _movesList{
     moveCell* head;
     moveCell* tail;
 }movesList;
+
+
+typedef struct _treeNodeListCell treeNodeListCell;
+
+typedef struct _treeNode{
+    boardPos position;
+    treeNodeListCell* next_possible_positions;
+}treeNode;
+
+typedef struct _treeNodeListCell{
+    treeNode* node;
+    struct _treeNodeListCell* next;
+}treeNodeListCell;
+
+typedef struct _pathTree{
+    treeNode * head;
+}pathTree;
 
 #endif
