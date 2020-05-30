@@ -8,10 +8,11 @@
 
 //General types:
 
-//TODO: Add description to MACRO
+//TODO: remove if redundant
+//This MACRO converts a char of integer into an int type
 #define parseInt(char) (char - '0')
 
-//TODO: Add description to MACRO
+//This MACRO converts a capital letter into it's ASCII
 #define changeInCapitals(char) (char - 'A')
 
 typedef int BOOL;
@@ -20,7 +21,7 @@ typedef int BOOL;
 
 #define TAKEN '#'
 #define BLOCKED '*'
-#define EOS '\0' //End Of String
+#define EOS '\0' //End Of String TODO: remove if redundant
 
 
 // Board types:

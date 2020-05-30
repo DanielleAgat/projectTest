@@ -11,27 +11,28 @@
 #include "stdbool.h"
 #include "ErrorsHandlings.h"
 
-//TODO: Add description
+//This function displays a given route on the board, after removing the invalid move nodes from the given list.
+//returns the number of removed nodes from the list.
 int display( movesList* moves_list, boardPos start, char** board);
 
-//TODO: Add description
+//This function copies a given board and adds a start point
 void copyBoard(char** orig, char** dest,boardPos start);
 
-//TODO: Add description
+//This function board position and an index and adds it to the given board
 void addCellToPath(char** board,boardPos currCell,Move move,char index);
 
-//TODO: Add description
+//This function removes a move node from a given list
 void removeMoveFromList(movesList* moves_List,moveCell**toRemove);
 
 //Free memory allocation functions:
 
-//TODO: Add description
+//This function frees a movesList list
 void freeMovesList(movesList* moves_list);
 
-//TODO: Add description
+//This is an inner function. It frees a movesList list
 void _freeMovesList(moveCell* move);
 
-//TODO: Add description
+//This function frees a board
 void freeBoard(char** board);
 
 #endif
