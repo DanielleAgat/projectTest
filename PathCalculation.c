@@ -7,25 +7,76 @@
 #include "PathCalculation.h"
 
 movesList* findPathCoveringAllBoard(boardPos start, movesArray** moves, char** board){
-//    TODO: Calculate empty cells in board
+    movesList* list;
+    int* levelCounter = 0;
+    *levelCounter = 0;
+    int numOfEmptyCells = getCountOfEmptyCells(board);
     pathTree allPossiblePaths = findAllPossiblePaths(start,moves,board);
-//    TODO: Create empty list
-//    TODO: Return list of all-cell path
 
+    makeEmptyList(&list);
+    if(getAllBoardPath(allPossiblePaths.head,list,levelCounter,numOfEmptyCells))
+        return list;
+    else
+        return NULL;
 }
 
-BOOL getAllBoardPath(treeNode* root,moveCell* list,int* levelCounter ,int emptyCells){
+int getCountOfEmptyCells(char** board){
+    int counter = 0;
+    for(int i = 0 ; i < N ; i++){
+        for(int j = 0 ; j < M ; j++){
+            counter += (board[i][j] == ' ') ? 1 : 0 ;
+        }
+    }
+    counter--;
+    return counter;
+}
+
+BOOL getAllBoardPath(treeNode* root,movesList* list,int* levelCounter ,int emptyCells){
     if(root == NULL && (*levelCounter != emptyCells)){
         return FALSE;
     }else if(*levelCounter == emptyCells){
         return TRUE;
     }
 
-    if(getAllBoardPath(root->next_possible_positions->node,list,levelCounter+1,emptyCells)){
-//        TODO: Add to list
-//        TODO: 
+    while(root->next_possible_positions->node != NULL){
+        if(getAllBoardPath(root->next_possible_positions->node,list,levelCounter+1,emptyCells)){
+            Move move = getLastMove(root->position,root->next_possible_positions->node->position);
+            insertDataToHead(list,move);
+            return TRUE;
+        }
+        root->next_possible_positions->node = root->next_possible_positions->next->node;
     }
+    return FALSE;
+}
+
+Move getLastMove(boardPos prev, boardPos curr){
+    Move move;
+    move.rows = prev[0] - curr[0];
+    move.cols = prev[1] - curr[1];
+    return move;
+}
 
 
+void insertDataToHead(movesList* lst,Move move){
+    moveCell* newNode = createMoveNode(move,lst->head,NULL);
+    _insertNewNodeHead(lst,newNode);
+}
 
+moveCell* createMoveNode(Move move, moveCell* next, moveCell* prev){
+    moveCell* newNode = (moveCell*)malloc(sizeof(moveCell));
+    checkMemoryAllocation(newNode);
+    newNode->move = move;
+    newNode->next = next;
+    newNode->prev = prev;
+    return newNode;
+}
+
+void _insertNewNodeHead(movesList* lst, moveCell* newNode){
+    if(lst->head == NULL){
+        lst->head = newNode;
+    }else{
+        newNode->next = lst->head;
+        lst->head->prev = newNode;
+        lst->head = newNode;
+    }
 }

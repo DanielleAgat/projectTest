@@ -4,62 +4,62 @@
 //Student's ID 2: 318420601
 
 #include "List_Tests.h"
+//
+//movesList getListFromUser(){
+//    movesList res;
+//    int size,i;
+//    Move move;
+//    int rows, cols;
+//
+//    makeEmptyList(&res);
+//
+//    printf("Please enter the number of items to be entered:\n");
+//    scanf("%d", &size);
+//
+//    printf("Please enter the numbers:\n");
+//    for(i = 0; i < size; i++){
+//        scanf("%d", &rows);
+//        scanf("%d", &cols);
+//        move.rows = (char)rows;
+//        move.cols = (char)cols;
+//        insertDataToEndList(&res, move);
+//    }
+//    return res;
+//}
+//
+//movesList getList(){
+//    movesList res;
+//    int size = 5,i;
+//    Move move;
+//
+//    makeEmptyList(&res);
+//
+//    for(i = 0; i < size; i++){
+//        move.rows = (char)((random() % 2 * 127) - 127);
+//        scanf("%c", &move.rows);
+//        scanf("%c", &move.cols);
+//        insertDataToEndList(&res, move);
+//    }
+//    return res;
+//}
 
-movesList getListFromUser(){
-    movesList res;
-    int size,i;
-    Move move;
-    int rows, cols;
+//void makeEmptyList(movesList* lst){
+//    lst->head = lst->tail = NULL;
+//}
 
-    makeEmptyList(&res);
+//void insertDataToEndList(movesList* lst,Move move){
+//    moveCell* newNode = createMoveNode(move,NULL,lst->tail);
+//    _insertNewNodeToEnd(lst,newNode);
+//}
 
-    printf("Please enter the number of items to be entered:\n");
-    scanf("%d", &size);
-
-    printf("Please enter the numbers:\n");
-    for(i = 0; i < size; i++){
-        scanf("%d", &rows);
-        scanf("%d", &cols);
-        move.rows = (char)rows;
-        move.cols = (char)cols;
-        insertDataToEndList(&res, move);
-    }
-    return res;
-}
-
-movesList getList(){
-    movesList res;
-    int size = 5,i;
-    Move move;
-
-    makeEmptyList(&res);
-
-    for(i = 0; i < size; i++){
-        move.rows = (char)((random() % 2 * 127) - 127);
-        scanf("%c", &move.rows);
-        scanf("%c", &move.cols);
-        insertDataToEndList(&res, move);
-    }
-    return res;
-}
-
-void makeEmptyList(movesList* lst){
-    lst->head = lst->tail = NULL;
-}
-
-void insertDataToEndList(movesList* lst,Move move){
-    moveCell* newNode = createMoveNode(move,NULL,lst->tail);
-    _insertNewNodeToEnd(lst,newNode);
-}
-
-moveCell* createMoveNode(Move move, moveCell* next, moveCell* prev){
-    moveCell* newNode = (moveCell*)malloc(sizeof(moveCell));
-    checkMemoryAllocation(newNode);
-    newNode->move = move;
-    newNode->next = next;
-    newNode->prev = prev;
-    return newNode;
-}
+//moveCell* createMoveNode(Move move, moveCell* next, moveCell* prev){
+//    moveCell* newNode = (moveCell*)malloc(sizeof(moveCell));
+//    checkMemoryAllocation(newNode);
+//    newNode->move = move;
+//    newNode->next = next;
+//    newNode->prev = prev;
+//    return newNode;
+//}
 
 void _insertNewNodeToEnd(movesList* lst, moveCell* newNode){
     newNode->next = NULL;

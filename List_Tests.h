@@ -12,13 +12,13 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-movesList getListFromUser();
+//movesList getListFromUser();
 
-void makeEmptyList(movesList* lst);
+//void makeEmptyList(movesList* lst);
 
-moveCell* createMoveNode(Move move, moveCell* next, moveCell* prev);
+//moveCell* createMoveNode(Move move, moveCell* next, moveCell* prev);
 
-void insertDataToEndList(movesList* lst,Move move);
+//void insertDataToEndList(movesList* lst,Move move);
 
 void _insertNewNodeToEnd(movesList* lst, moveCell* newNode);
 

@@ -35,4 +35,7 @@ void _freeMovesList(moveCell* move);
 //This function frees a board
 void freeBoard(char** board);
 
+//This function creates an empty movesList
+void makeEmptyList(movesList* lst);
+
 #endif
