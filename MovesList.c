@@ -80,3 +80,7 @@ void freeBoard(char** board){
             free(board[i]);
     free(board);
 }
+
+void makeEmptyList(movesList* lst){
+    lst->head = lst->tail = NULL;
+}

@@ -11,7 +11,8 @@
 #include "Types.h"
 #include "tree.h"
 
-
+//TODO: Add description
+movesList* findPathCoveringAllBoard(boardPos start, movesArray** moves, char** board);
 
 
 #endif
