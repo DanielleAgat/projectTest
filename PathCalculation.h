@@ -18,7 +18,7 @@ movesList* findPathCoveringAllBoard(boardPos start, movesArray** moves, char** b
 int getCountOfEmptyCells(char** board);
 
 //TODO: Add description
-BOOL getAllBoardPath(treeNode* root,movesList* list,int* levelCounter ,int emptyCells);
+BOOL getAllBoardPath(treeNode* root,movesList* list,int levelCounter ,int emptyCells);
 
 //TODO: Add description
 Move getLastMove(boardPos prev, boardPos curr);

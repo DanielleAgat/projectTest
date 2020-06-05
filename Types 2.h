@@ -25,8 +25,8 @@ typedef int BOOL;
 
 
 // Board types:
-#define N 2 //Board's rows
-#define M 4 //Board's cols
+#define N 4 //Board's rows
+#define M 5 //Board's cols
 
 typedef char boardPos[2];
 
@@ -64,11 +64,11 @@ typedef struct _treeNodeListCell treeNodeListCell;
 
 typedef struct _treeNode{
     boardPos position;
-    treeNodeListCell* next_possible_positions; //Brothers
+    treeNodeListCell* next_possible_positions;
 }treeNode;
 
-typedef struct _treeNodeListCell{ //Brothers
-    treeNode* node; //Son
+typedef struct _treeNodeListCell{
+    treeNode* node;
     struct _treeNodeListCell* next;
 }treeNodeListCell;
 

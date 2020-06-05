@@ -41,6 +41,8 @@ void copyBoard(char** orig, char** dest,boardPos start){
         for (int j = 0; j < M; j++)
             dest[i][j] = orig[i][j];
     }
+    int row = changeInCapitals(start[0]); //TODO: DEBUG ONLY !!!!! Remove before submission
+    int col = start[1]-1 ; //TODO: DEBUG ONLY !!!!! Remove before submission
     dest[changeInCapitals(start[0])][start[1]-1] = TAKEN; //Set start position
 }
 

@@ -8,14 +8,15 @@
 #include "List_Tests.h"
 #include "Types.h"
 #include "tree.h"
+#include "PathCalculation.h"
 
 void printTree(pathTree tree);
 void printTreeAux(treeNode* node);
 
 //#define question1
 //#define question2
-#define question3
-//#define question3b
+//#define question3
+#define question4
 
 
 int main(){
@@ -24,6 +25,8 @@ int main(){
 					  "*    ",
 					  "    *",
 					  "  * *" };
+
+	char* boardMini[] = {"  * ","*   "};
 
     char* emptyBoard[] = { "     ",
                            "     ",
@@ -101,86 +104,33 @@ int main(){
 //    }
 
     tree = findAllPossiblePaths(start,moves3,board);
-
-
 #endif question3
 
-#ifdef question3b
+///////////////    Question 3 tests:    ///////////////
+#ifdef question4
+    movesArray** moves4;
+    boardPos start4;
+    movesList* list;
+    int i, j;
+    moves4 = (movesArray**)malloc(sizeof(movesArray*) * N);
+    for (i = 0; i < N; i++){
+        moves4[i] = (movesArray*)malloc(sizeof(movesArray) * M);
+    }
 
-    char boardQuestion3[M][N] = { {' ',' ', '*', ' '},{'*',' ', ' ', ' '},{ ' ','*', ' ', ' ' },{ ' ',' ', ' ', ' ' } };
+    start4[0] = 'C';
+    start4[1] = 3;
 
-	// Test for question #1 // - passed
+    initMovesArray(moves4);
+    list = findPathCoveringAllBoard(start4,moves4,boardMini);
 
-	int i, j, k;
-	movesArray** boardMoves;
-	movesArray* currBoardMove;
-	boardPosArray** boardPosArr;
+    if(list == NULL)
+        printf("There is no path!");
+    else
+        printList(*list);
 
-	int size;
 
-	boardMoves = (movesArray**)malloc(M * sizeof(movesArray*));
-
-	for (i = 0; i < M; i++)
-	{
-		boardMoves[i] = (movesArray*)malloc(N * sizeof(movesArray));
-
-		for (j = 0; j < N; j++)
-		{
-			currBoardMove = &(boardMoves[i][j]);
-			currBoardMove->size = 4;
-			currBoardMove->moves = (Move*)malloc(4 * sizeof(Move));
-			currBoardMove->moves[0].rows = 1;
-			currBoardMove->moves[0].cols = -1;
-			currBoardMove->moves[1].rows = -1;
-			currBoardMove->moves[1].cols = 1;
-			currBoardMove->moves[2].rows = 1;
-			currBoardMove->moves[2].cols = 1;
-			//currBoardMove->moves[3].rows = -1;
-			//currBoardMove->moves[3].cols = -1;
-		}
-	}
-
-	boardPosArr = validMoves(boardMoves, board);
-	char tempc1, tempc2;
-	for (i = 0; i < M; i++)
-	{
-		for (j = 0; j < N; j++)
-		{
-			size = boardPosArr[i][j].size;
-			for (k = 0; k < size; k++)
-			{
-				tempc1 = boardPosArr[i][j].positions[k][0];
-				tempc2 = boardPosArr[i][j].positions[k][1];
-				printf("%c%d: %c%c   ", i + 65, j + 1, tempc1,tempc2);
-				//printf("%c%d: %d   ", i + 65, j + 1, size);
-
-			}
-		}
-		printf("\n");
-	}
-
-	printf("\n");
-	char c;
-	for (i = 0; i < M; i++)
-	{
-		c = i + 'A';
-		for (j = 0; j < N; j++)
-		{
-			currBoardMove = &(boardMoves[i][j]);
-			printf("%c%d: %d ", c, j + 1, currBoardMove->size);
-			printf("\n");
-			//for (k = 0; k < currBoardMove->size; k++)
-			//{
-			//	c = i + 'A';
-			//	printf("%c%d: ", c, j + 1);
-			//	printf("%d ", currBoardMove->moves[k].rows);
-			//	printf("%d", currBoardMove->moves[k].cols);
-			//	printf("\n");
-			//}
-		}
-	}
-	printf("\n");
 #endif
+
 
     exit(0);
 }

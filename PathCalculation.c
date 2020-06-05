@@ -8,8 +8,7 @@
 
 movesList* findPathCoveringAllBoard(boardPos start, movesArray** moves, char** board){
     movesList* list;
-    int* levelCounter = 0;
-    *levelCounter = 0;
+    int levelCounter = 0;
     int numOfEmptyCells = getCountOfEmptyCells(board);
     pathTree allPossiblePaths = findAllPossiblePaths(start,moves,board);
 
@@ -31,20 +30,20 @@ int getCountOfEmptyCells(char** board){
     return counter;
 }
 
-BOOL getAllBoardPath(treeNode* root,movesList* list,int* levelCounter ,int emptyCells){
-    if(root == NULL && (*levelCounter != emptyCells)){
+BOOL getAllBoardPath(treeNode* root,movesList* list,int levelCounter ,int emptyCells){
+    if(root == NULL && (levelCounter != emptyCells)){
         return FALSE;
-    }else if(*levelCounter == emptyCells){
+    }else if(levelCounter == emptyCells){
         return TRUE;
     }
 
-    while(root->next_possible_positions->node != NULL){
+    while(root->next_possible_positions != NULL){
         if(getAllBoardPath(root->next_possible_positions->node,list,levelCounter+1,emptyCells)){
             Move move = getLastMove(root->position,root->next_possible_positions->node->position);
             insertDataToHead(list,move);
             return TRUE;
         }
-        root->next_possible_positions->node = root->next_possible_positions->next->node;
+        root->next_possible_positions = root->next_possible_positions->next;
     }
     return FALSE;
 }
