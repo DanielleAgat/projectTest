@@ -12,9 +12,25 @@
 #include "stdlib.h"
 #include "ErrorsHandlings.h"
 
-pathTree findAllPossiblePaths ( boardPos start, movesArray **moves, char **board);
+//TODO: Add description
+#define isEmptyList(lst) (((lst) == NULL) ? TRUE : FALSE)
+
+//TODO: Add description
+pathTree findAllPossiblePaths(boardPos start, movesArray **moves, char **board);
+
+//TODO: Add description
 treeNode* _findAllPossiblePaths(char** board,movesArray** moves,boardPos start,treeNode* node);
-BOOL isEmpty(treeNodeListCell* nextPossiblePos);
+
+//TODO: Add description
+treeNodeListCell* insertValidPosToHead(treeNodeListCell* lst,boardPos data);
+
+//void insertValidPosToHead(treeNodeListCell* lst,boardPos data);
+
+//TODO: Add description
+treeNode* createNode(boardPos data,treeNodeListCell* nextPossiblePosition);
+
+//TODO: Add description
+void removeTakenPos(char** board,boardPos* posToRemove,int size);
 
 
 #endif

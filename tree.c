@@ -9,7 +9,9 @@ pathTree findAllPossiblePaths(boardPos start, movesArray** moves, char** board){
     pathTree path;
     char** boardCopy = (char**)malloc(sizeof(char*) * N);
     copyBoard(board,boardCopy,start);
+    validMoves(moves, board);
 //    Declaring tree source :
+    path.head = (treeNode*)malloc(sizeof(treeNode));
     path.head->position[0] = start[0];
     path.head->position[1] = start[1];
     path.head->next_possible_positions = NULL;
@@ -18,25 +20,67 @@ pathTree findAllPossiblePaths(boardPos start, movesArray** moves, char** board){
 }
 
 treeNode* _findAllPossiblePaths(char** board,movesArray** moves,boardPos start,treeNode* node){
-    int startCol = start[1];
+    int startCol = start[1]-1;
     int startRow = changeInCapitals(start[0]);
-    unsigned int numOfChild = moves[changeInCapitals(start[0])][start[1]].size;
+    int logSize = 0;
+    boardPos changesInBoard[M*N];
+    unsigned int numOfChild = moves[startRow][startCol].size;
 
-    for(unsigned int i = 0 ; i < numOfChild ; i++ ){ //Runs as long as there are children to the boardpos
-        if(isEmpty(node->next_possible_positions)){
-//            TODO: Generate empty list - treeNodeListCell
-        }
-        if(isValid(board,moves[startRow][startCol].moves[i],start[0],start[1])){
-//            TODO: Add to end of list - treeNode
-            addCellToPath(board,start,moves[startRow][startCol].moves[i],TAKEN);
-            _findAllPossiblePaths(board,moves,start,node->next_possible_positions->node);
-//            TODO: Check if the board doesn't affect the board on other routes
-        }
+    if(node == NULL && numOfChild != 0){
+        node = (treeNode*)malloc(sizeof(treeNode));
+        node->position[0] = start[0];
+        node->position[1] = start[1];
+        node->next_possible_positions = NULL;
     }
 
+    printf("\n%c%d ",start[0],start[1]); //TODO: Remove before submission
+    printf("Node's position: %c%d ", node->position[0], node->position[1]); //TODO: Remove before submission
+    printf("\nInner list:\n"); //TODO: Remove before submission
+
+    for(unsigned int i = 0 ; i < numOfChild ; i++ ){ //Runs as long as there are children to the boardPos
+        int k = changeInCapitals(start[0]);
+        int t = start[1]-1;
+        if(isValid(board,moves[startRow][startCol].moves[i],k,t)){
+            if(isEmptyList(node->next_possible_positions)){
+                node->next_possible_positions = (treeNodeListCell*)malloc(sizeof(treeNodeListCell));
+                node->next_possible_positions->next = NULL;
+                node->next_possible_positions->node = NULL;
+            }
+            addCellToPath(board,start,moves[startRow][startCol].moves[i],TAKEN);
+            node->next_possible_positions = insertValidPosToHead(node->next_possible_positions,start);
+            printf("%c%d ",start[0],start[1]); //TODO: Remove before submission
+            changesInBoard[logSize][0] = start[0];
+            changesInBoard[logSize++][1] = start[1];
+            node->next_possible_positions->node = _findAllPossiblePaths(board,moves,start,node->next_possible_positions->node);
+
+            //Return to original parameters:
+            start[0] -= moves[startRow][startCol].moves[i].rows;
+            start[1] -= moves[startRow][startCol].moves[i].cols;
+            removeTakenPos(board,changesInBoard,logSize); //TODO: Check failure
+        }
+    }
     return node;
 }
 
-BOOL isEmpty(treeNodeListCell* nextPossiblePos){
-//    TODO: Fill
+treeNodeListCell* insertValidPosToHead(treeNodeListCell* lst,boardPos data){
+    treeNodeListCell* newListCell = (treeNodeListCell*)malloc(sizeof(treeNodeListCell));
+    newListCell->node = createNode(data,NULL);
+    newListCell->next = lst;
+    return newListCell;
+}
+
+treeNode* createNode(boardPos data,treeNodeListCell* nextPossiblePosition){
+    treeNode* newNode = (treeNode*)malloc(sizeof(treeNode));
+    newNode->position[0] = data[0];
+    newNode->position[1] = data[1];
+    newNode->next_possible_positions = nextPossiblePosition;
+    return newNode;
+}
+
+void removeTakenPos(char** board,boardPos posToRemove[],int size){
+    for(int i = 0 ; i < size ; i++){
+        int startCol = posToRemove[i][1]-1;
+        int startRow = changeInCapitals(posToRemove[i][0]);
+        board[startRow][startCol] = ' ';
+    }
 }

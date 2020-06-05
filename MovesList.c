@@ -15,7 +15,7 @@ int display(movesList* moves_list, boardPos start, char** board){
     moveCell* currMoveCell = moves_list->head;
 
     while(currMoveCell != NULL){
-        if(isValid(boardCopy,currMoveCell->move,changeInCapitals(start[0]),start[1])){
+        if(isValid(boardCopy,currMoveCell->move,changeInCapitals(start[0]),start[1]-1)){
             addCellToPath(boardCopy,start,currMoveCell->move,index++);
             currMoveCell = currMoveCell->next;
         }else{
@@ -30,9 +30,9 @@ int display(movesList* moves_list, boardPos start, char** board){
 }
 
 void addCellToPath(char** board,boardPos currCell,Move move,char index){
-    board[changeInCapitals(currCell[0]) + move.rows][currCell[1] + move.cols] = index;
     currCell[0] += move.rows;
     currCell[1] += move.cols;
+    board[changeInCapitals(currCell[0])][currCell[1]-1] = index;
 }
 
 void copyBoard(char** orig, char** dest,boardPos start){
@@ -41,7 +41,7 @@ void copyBoard(char** orig, char** dest,boardPos start){
         for (int j = 0; j < M; j++)
             dest[i][j] = orig[i][j];
     }
-    dest[changeInCapitals(start[0])][start[1]] = TAKEN; //Set start position
+    dest[changeInCapitals(start[0])][start[1]-1] = TAKEN; //Set start position
 }
 
 void removeMoveFromList(movesList* moves_List, moveCell** toRemove) {

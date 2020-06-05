@@ -8,15 +8,18 @@
 void PrintMovesBoard(movesArray** moves){
 	char row_letter = 65;
 	printf(" ");
-	int i, j;
+	int i, j,k ;
 	for (j = 1; j < (M + 1); j++){
-		printf("    %d", j);
+//		printf("    %d", j);
 	}
 	printf("\n");
 	for (i = 0; i < N; i++){
-		printf("%c", row_letter);
+//		printf("%c", row_letter);
 		for (int j = 0; j < M; j++){
-			//printf("    %c", moves[i][j]);
+		    for(k = 0 ; k < moves[i][j].size ; k ++) {
+                printf("row: %d col: %d \n", moves[i][j].moves[k].rows, moves[i][j].moves[k].cols);
+            }
+            printf("\n");
 		}
 		row_letter++;
 		printf("\n");
@@ -53,8 +56,11 @@ void initMovesArray(movesArray** moves){
 
 	for (i = 0; i < N; i++){
 		for (j = 0; j < M; j++){
-			moves[i][j].size = 4;
-			moves[i][j].moves = (Move*)malloc(sizeof(Move) * 4);
+			if(i == 0 && j == 0)
+                moves[i][j].size = 5;
+			else
+                moves[i][j].size = 4;
+			moves[i][j].moves = (Move*)malloc(sizeof(Move) * moves[i][j].size);
 			moves[i][j].moves[0].rows = 2;
 			moves[i][j].moves[0].cols = -2;
 			moves[i][j].moves[1].rows = -2;
@@ -65,6 +71,9 @@ void initMovesArray(movesArray** moves){
 			moves[i][j].moves[3].cols = 2;
 		}
 	}
+
+	moves[0][0].moves[4].rows = 2;
+    moves[0][0].moves[4].cols = 1;
 }
 
 boardPosArray** validMoves(movesArray** moves, char** board){
@@ -76,7 +85,7 @@ boardPosArray** validMoves(movesArray** moves, char** board){
 		res[i] = (boardPosArray*)malloc(sizeof(boardPosArray) * M);
 		for (j = 0; j < M; j++){
 			int logsize = 0;
-			Move* temp = (Move*)malloc(sizeof(Move) * moves[i][j].size); //4
+			Move* temp = (Move*)malloc(sizeof(Move) * moves[i][j].size);
 			res[i][j].positions = (boardPos*)malloc(sizeof(boardPos) * moves[i][j].size);
 
 			int indexMoves = 0;
@@ -95,6 +104,7 @@ boardPosArray** validMoves(movesArray** moves, char** board){
 			if (logsize < indexMoves){
 				temp = (Move*)realloc(temp, (sizeof(Move)) * logsize);
 				res[i][j].positions = (boardPos*)realloc(res[i][j].positions, (sizeof(boardPos)) * logsize);
+				moves[i][j].size = logsize;
 				res[i][j].size = logsize;
 			}
 
@@ -118,3 +128,4 @@ BOOL isValid(char** board, Move cellDest, int i, int j){
 	else
 		return TRUE;
 }
+

@@ -73,7 +73,7 @@ typedef struct _treeNodeListCell{
 }treeNodeListCell;
 
 typedef struct _pathTree{
-    treeNode * head;
+    treeNode* head;
 }pathTree;
 
 #endif
