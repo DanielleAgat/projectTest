@@ -7,12 +7,12 @@
 #include "PathCalculation.h"
 
 movesList* findPathCoveringAllBoard(boardPos start, movesArray** moves, char** board){
-    movesList* list;
+    movesList* list = (movesList*)malloc(sizeof(movesList));
     int levelCounter = 0;
     int numOfEmptyCells = getCountOfEmptyCells(board);
     pathTree allPossiblePaths = findAllPossiblePaths(start,moves,board);
 
-    makeEmptyList(&list);
+    makeEmptyList(list);
     if(getAllBoardPath(allPossiblePaths.head,list,levelCounter,numOfEmptyCells))
         return list;
     else
@@ -48,10 +48,10 @@ BOOL getAllBoardPath(treeNode* root,movesList* list,int levelCounter ,int emptyC
     return FALSE;
 }
 
-Move getLastMove(boardPos prev, boardPos curr){
+Move getLastMove(boardPos curr, boardPos next){
     Move move;
-    move.rows = prev[0] - curr[0];
-    move.cols = prev[1] - curr[1];
+    move.rows = next[0] - curr[0];
+    move.cols = next[1] - curr[1];
     return move;
 }
 

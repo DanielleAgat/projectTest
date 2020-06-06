@@ -25,8 +25,8 @@ typedef int BOOL;
 
 
 // Board types:
-#define N 2 //Board's rows
-#define M 4 //Board's cols
+#define N 4 //Board's rows
+#define M 5 //Board's cols
 
 typedef char boardPos[2];
 

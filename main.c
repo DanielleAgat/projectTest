@@ -117,8 +117,8 @@ int main(){
         moves4[i] = (movesArray*)malloc(sizeof(movesArray) * M);
     }
 
-    start4[0] = 'C';
-    start4[1] = 3;
+    start4[0] = 'A';
+    start4[1] = 2;
 
     initMovesArray(moves4);
     list = findPathCoveringAllBoard(start4,moves4,boardMini);
@@ -127,7 +127,6 @@ int main(){
         printf("There is no path!");
     else
         printList(*list);
-
 
 #endif
 

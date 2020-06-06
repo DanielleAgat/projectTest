@@ -53,28 +53,34 @@ void PrintBoard(char** board){
 
 void initMovesArray(movesArray** moves){
 	int i, j;
+#define basicTest
+//#define coverAllBoard
 
-//	for (i = 0; i < N; i++){
-//		for (j = 0; j < M; j++){
-//			if(i == 0 && j == 0)
-//                moves[i][j].size = 5;
-//			else
-//                moves[i][j].size = 4;
-//			moves[i][j].moves = (Move*)malloc(sizeof(Move) * moves[i][j].size);
-//			moves[i][j].moves[0].rows = 2;
-//			moves[i][j].moves[0].cols = -2;
-//			moves[i][j].moves[1].rows = -2;
-//			moves[i][j].moves[1].cols = -2;
-//			moves[i][j].moves[2].rows = 2;
-//			moves[i][j].moves[2].cols = 2;
-//			moves[i][j].moves[3].rows = -2;
-//			moves[i][j].moves[3].cols = 2;
-//		}
-//	}
-//
-//	moves[0][0].moves[4].rows = 2;
-//    moves[0][0].moves[4].cols = 1;
+#ifdef basicTest
+	for (i = 0; i < N; i++){
+		for (j = 0; j < M; j++){
+			if(i == 0 && j == 0)
+                moves[i][j].size = 5;
+			else
+                moves[i][j].size = 4;
+			moves[i][j].moves = (Move*)malloc(sizeof(Move) * moves[i][j].size);
+			moves[i][j].moves[0].rows = 2;
+			moves[i][j].moves[0].cols = -2;
+			moves[i][j].moves[1].rows = -2;
+			moves[i][j].moves[1].cols = -2;
+			moves[i][j].moves[2].rows = 2;
+			moves[i][j].moves[2].cols = 2;
+			moves[i][j].moves[3].rows = -2;
+			moves[i][j].moves[3].cols = 2;
+		}
+	}
 
+	moves[0][0].moves[4].rows = 2;
+    moves[0][0].moves[4].cols = 1;
+
+#endif
+
+#ifdef coverAllBoard
     for (i = 0; i < N; i++){
         for (j = 0; j < M; j++) {
             moves[i][j].size = 1;
@@ -96,6 +102,8 @@ void initMovesArray(movesArray** moves){
     moves[1][3].moves[0].rows = 0; //B4
     moves[1][3].moves[0].cols = -1;
     //Last = B3
+#endif
+
 }
 
 boardPosArray** validMoves(movesArray** moves, char** board){
