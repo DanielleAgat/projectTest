@@ -21,10 +21,10 @@ void saveListToBinFile(char* file_name, boardPosArray* pos_arr){
         while (j < pos_arr->size) {
             if (index / 4 == 0 && ((j % 4 == 1) || (j % 4 == 2) )) {
                 if (j % 4 == 1) {
-                    c[0] = (pos_arr->positions[j][0] - 'A') << 5) | (pos_arr->positions[j][1] - '1' << 2);
+                    c[0] = (((pos_arr->positions[j][0] - 'A')& 0x0E) << 5) | (pos_arr->positions[j][1] - '1' << 2);
                     fwrite(&c, sizeof(BYTE), 1, fb);
                 }else {
-                    c[0] = (pos_arr->positions[j][0] - 'A') << 5) | (pos_arr->positions[j][1] - '1' << 2) | (pos_arr->positions[j + 1][0] - 'A' >> 1);
+                    c[0] = (((pos_arr->positions[j][0] - 'A')& 0x0E) << 5) | (pos_arr->positions[j][1] - '1' << 2) | (pos_arr->positions[j + 1][0] - 'A' >> 1);
                     c[1] = (pos_arr->positions[j + 1][0] - 'A' << 7) | (pos_arr->positions[j + 1][1] - '1' << 4);
                     fwrite(&c, sizeof(BYTE), 2, fb);
                 }
@@ -45,7 +45,8 @@ void saveListToBinFile(char* file_name, boardPosArray* pos_arr){
 }
 
 void setBits(boardPosArray* pos_arr,BYTE res[], int j) {
-    res[0]= (pos_arr->positions[j][0] - 'A') << 5) | (pos_arr->positions[j][1] - '1' << 2) | (pos_arr->positions[j+1][0] - 'A' >>1);
+    (pos_arr->positions[j][0] - 'A');
+    res[0]=  (((pos_arr->positions[j][0] - 'A') & 0x0E) << 5) | ((pos_arr->positions[j][1] - '1') << 2) | (pos_arr->positions[j+1][0] - 'A' >>1);
     res[1] = (pos_arr->positions[j + 1][0] - 'A' << 7) | (pos_arr->positions[j + 1][1] - '1' << 4 ) | (pos_arr->positions[j + 2][0] - 'A' << 1) | (pos_arr->positions[j + 2][1] - '1' >> 2);
     res[2]= (pos_arr->positions[j + 2][1] - '1' << 6) | (pos_arr->positions[j + 3][0] - 'A' << 3) | (pos_arr->positions[j + 3][1] - '1' );
 }

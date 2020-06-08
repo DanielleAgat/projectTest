@@ -9,6 +9,7 @@
 #include "Types.h"
 #include "tree.h"
 #include "PathCalculation.h"
+#include "BinFile.h"
 
 void printTree(pathTree tree);
 void printTreeAux(treeNode* node);
@@ -16,8 +17,8 @@ void printTreeAux(treeNode* node);
 //#define question1
 //#define question2
 //#define question3
-#define question4
-
+//#define question4
+#define question5
 
 int main(){
 
@@ -106,7 +107,7 @@ int main(){
     tree = findAllPossiblePaths(start,moves3,board);
 #endif question3
 
-///////////////    Question 3 tests:    ///////////////
+///////////////    Question 4 tests:    ///////////////
 #ifdef question4
     movesArray** moves4;
     boardPos start4;
@@ -127,6 +128,21 @@ int main(){
         printf("There is no path!");
     else
         printList(*list);
+#endif
+
+///////////////    Question 5 tests:    ///////////////
+#ifdef question5
+boardPosArray* arr = (boardPosArray*)malloc(sizeof(boardPosArray));
+arr->size = 3;
+arr->positions = (boardPos*)malloc(sizeof(boardPos) * arr->size);
+arr->positions[0][0] = 'A';
+arr->positions[0][1] = 2;
+arr->positions[0][0] = 'C';
+arr->positions[0][1] = 4;
+arr->positions[0][0] = 'B';
+arr->positions[0][1] = 3;
+
+saveListToBinFile("/Users/Agat/Desktop/TalEliptital",arr);
 
 #endif
 
